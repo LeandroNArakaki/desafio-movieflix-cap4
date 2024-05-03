@@ -1,5 +1,6 @@
 package com.devsuperior.movieflix.dto;
 
+import com.devsuperior.movieflix.entities.Review;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -7,7 +8,7 @@ public class ReviewDTO {
 
     private Long id;
 
-    @NotBlank(message = "Campo requerido")
+	@NotBlank(message = "Não é permitido texto vazio na avaliação")
     private String text;
 
     @NotNull(message = "Campo requerido")
@@ -63,5 +64,17 @@ public class ReviewDTO {
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+
+	public ReviewDTO() {
+	}
+
+	public ReviewDTO(Review review) {
+		this.id = review.getId();
+		this.text = review.getText();
+		this.movieId = review.getMovie().getId();
+		this.userId = review.getUser().getId();
+		this.userName = review.getUser().getName();
+		this.userEmail = review.getUser().getEmail();
 	}
 }
